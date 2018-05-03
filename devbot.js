@@ -175,6 +175,9 @@ var isReady = true;
     // console.log(voice_channel.members);
     var members = voice_channel.members.array();
 
+    console.log('setup complete,\n\t`members` available.');
+    debugger;
+    console.log('starting // map integers to team names && team names to roster');
     // map integers to team names && team names to roster
     for(var t_n_1 in team_names){
       var t_n_2 = team_names[t_n_1];
@@ -182,19 +185,15 @@ var isReady = true;
       team_map[counter] = t_n_2;
       roster[t_n_2] = [];
       counter += 1;
+      debugger;
     }
     counter = 0;
 
-    // console.log('\n');
-    // console.log('roster:')
-    // console.log(roster);
-
-    // console.log('\n');
-    // console.log('team_map:')
-    // console.log(team_map);
-
     // setup max team size = || =- 1
     max_size = Math.floor(members.length / 2);
+
+    console.log('team_map & roster setup complete,\n\t`max_size` available.');
+    debugger;
 
     // evenly divide players, deciding team_1 >= team_i >= team_n
     for(mumbar in members){

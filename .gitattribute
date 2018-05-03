@@ -1,0 +1,24 @@
+# Set the default behaviour
+*         text=auto
+#######
+
+# normalize line-endings for these files (convert `crlf` to `lf`)
+*.js      text
+*.json    text
+#######
+
+
+# ignore these ones though
+#######
+
+
+## binary items
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.bmp     binary
+*.gif     binary
+*.gifv    binary
+*.mpeg    binary
+*.mp3     binary
+#######
