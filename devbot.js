@@ -158,11 +158,11 @@ var isReady = true;
         num_teams = 2,
         team = 0,
         counter = 0,
-        team_map = {},
+        team_map = {}, // integer to team name
         max_size = 1,
-        overflow = false,
         counter_overflow = 0,
         ret = 0,
+        overflow_map = {},
         a = 1; // for versioning purposes (not the variable; the throw-away line!)
 
     // verify &| refuse voiceChannel -- TODO
@@ -170,13 +170,11 @@ var isReady = true;
     // setup num_teams
     num_teams = team_names.length;
 
-    // get all members in author's active voice channel - TODO
-    // console.log(voice_channel);
-    // console.log(voice_channel.members);
+    // get all members in author's active voice channel
     var members = voice_channel.members.array();
 
     console.log('setup complete,\n\t`members` available.');
-    debugger;
+    // debugger;
     console.log('starting // map integers to team names && team names to roster');
     // map integers to team names && team names to roster
     for(var t_n_1 in team_names){
@@ -184,16 +182,17 @@ var isReady = true;
 
       team_map[counter] = t_n_2;
       roster[t_n_2] = [];
+      overflow_map[t_n_2] = false;
       counter += 1;
-      debugger;
+      // debugger;
     }
     counter = 0;
 
     // setup max team size = || =- 1
-    max_size = Math.floor(members.length / 2);
+    max_size = (members.length != 1) ? Math.floor(members.length / 2) : 1;
 
     console.log('team_map & roster setup complete,\n\t`max_size` available.');
-    debugger;
+    // debugger;
 
     // evenly divide players, deciding team_1 >= team_i >= team_n
     for(mumbar in members){
@@ -202,30 +201,33 @@ var isReady = true;
           b = 1,
           member = members[mumbar];
 
-      console.log('\n'+member.user.username);
+      console.log('\nplacing : '+member.user.username);
 
       while( !placed){
         var team = (Math.floor(Math.random() * num_teams) + (num_teams - 2)).toString();
-            team_size = team_map[team];
+            team_size = roster[team_map[team]].length;
+
+        // debugger ;
 
         if(team_size < max_size){
-          // console.log('if(team_size < max_size)');
           roster[team_map[team].toString()].push(member.user.username);
           placed = true;
-        }else if(overflow){
-          // console.log('}else if(overflow){');
-          counter_overflow = 0;
-          overflow = false;
-          roster[team_map[team].toString()].push(member.user.username);
-          placed = true;
-        } else {
-          // console.log('} else {');
-          if(counter_overflow == num_teams){
-            overflow = true;
-          } else {
-            counter_overflow += 1;
+          // debugger;
+        }else{
+          overflow_map[team_map[team]] = true;
+
+          // check for overflow status, and react accordingly
+          var trip_overflow = true;
+          for(var over_i in overflow_map){
+            trip_overflow = trip_overflow && overflow_map[over_i];
+            // debugger;
           }
+          if(trip_overflow){
+            max_size += 1;
+          }
+          // debugger;
         }
+        // debugger;
       }
     }
 
