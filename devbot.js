@@ -399,7 +399,7 @@ var isReady = true;
             break;
           default:
             if (msg.slice(0,1) === '!'){
-              text_channel.send(username + ': sorry, I do not recognize that command, though I am willing to learn.')
+              text_channel.send(username + ': sorry, I do not recognize that command, though I am willing to learn. Get involved at https://github.com/timm3/ASSDIC');
             }
             break;
         }
