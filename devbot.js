@@ -285,6 +285,16 @@ var isReady = true;
     return ret;
   }
 
+  /*
+    Def: roll 0/1 to {limit} somewhat randomly
+    Args:
+      message (Discord.js-Message) - message to reply to
+      limit (int) - max roll value
+  */
+  function roll(message, limit) {
+    var pseudo_random_value = Math.floor((Math.random() * Math.floor(limit)));
+    message.reply(pseudo_random_value);
+  }
 
 /*** end command functions ***/
 
@@ -380,6 +390,12 @@ var isReady = true;
             teams(voice_channel, text_channel);
             // var team = Math.floor(Math.random() * 2) + 1;
             // text_channel.send(username + ', you will be on team ' + team + '.');
+            break;
+          /* direct commands */
+          case '!roll':
+            var maybe_roll_max = parseInt(args.pop());
+            var roll_max = isNaN(maybe_roll_max) ? 100 : maybe_roll_max;
+            roll(message, roll_max);
             break;
           case '!newbot':
             new_bot(attachments);
