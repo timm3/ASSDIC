@@ -44,6 +44,7 @@ var isReady = true;
     '!stop',
     '!newbot',
     '!yt',
+    '!roll',
   ]
 /*** end non-direct-response mapping ***/
 
