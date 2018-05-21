@@ -351,7 +351,7 @@ var isReady = true;
       var text_channel = message.channel;
       var voice_channel = message.member.voiceChannel;
       var full_message = message.content;
-      var msg = '';
+      var cmd = '';
       var args = [];
       var attachments = message.attachments; // type = Discord.js[Collection]
 
@@ -367,10 +367,10 @@ var isReady = true;
       // }
       console.log('now processing command');
 
-      // get arguments & set msg // cleaned up message.content
+      // get arguments & set cmd // cleaned up message.content
       var pre_args = full_message.trim().split(/ +/g);
       try {
-        msg = pre_args[0].trim();
+        cmd = pre_args[0].trim();
       } catch(err) {
         console.log(err);
       }
@@ -386,7 +386,7 @@ var isReady = true;
       if(isReady){
         isReady = false;
 
-        switch(msg){
+        switch(cmd){
           /* voice commands */
           case '!africa':
           case '!choppa':
@@ -405,7 +405,7 @@ var isReady = true;
             var voiceChannel = message.member.voiceChannel;
             if(voiceChannel){
               voiceChannel.join().then(connection =>{
-                const dispatcher = connection.playFile(audio_map[msg]);
+                const dispatcher = connection.playFile(audio_map[cmd]);
                 dispatcher.on("end", end => {
                   voiceChannel.leave();
                 });
@@ -421,7 +421,7 @@ var isReady = true;
           case '!makeitgay':
           case '!miles':
           case '!y':
-            text_channel.send(text_map[msg]);
+            text_channel.send(text_map[cmd]);
             break;
           /* non-direct commands */
           case '!team':
@@ -452,7 +452,7 @@ var isReady = true;
               message.reply('Why hello, humanoid.');
             break;
           default:
-            if (msg.slice(0,1) === '!'){
+            if (cmd.slice(0,1) === '!'){
               text_channel.send(username + ': sorry, I do not recognize that command, though I am willing to learn. Get involved at https://github.com/timm3/ASSDIC');
             }
             break;
