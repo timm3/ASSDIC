@@ -370,7 +370,7 @@ var isReady = true;
       // get arguments & set cmd // cleaned up message.content
       var pre_args = full_message.trim().split(/ +/g);
       try {
-        cmd = pre_args[0].trim();
+        cmd = pre_args[0].trim().toLowerCase();
       } catch(err) {
         console.log(err);
       }
