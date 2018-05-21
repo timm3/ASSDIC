@@ -25,6 +25,8 @@ var isReady = true;
     '!suh' : './media/audio/suh.mp3',
     '!wahwah' : './media/audio/wahwah.mp3',
     '!winner' : './media/audio/best.mp3',
+    '!psycho' : './media/audio/psycho-lollipop.mp3',
+    '!lollipop' : './media/audio/psycho-lollipop.mp3',
   }
 /*** end audio command mapping ***/
 
@@ -60,6 +62,7 @@ var isReady = true;
 /*** end help command building ***/
 
 /*** command functions ***/
+
   /*
     Def: upload and run new bot file
     Args:
@@ -297,6 +300,38 @@ var isReady = true;
     message.reply(pseudo_random_value);
   }
 
+  /*
+    Def: move @mention between (random) voice channels X times, finally placing in voiceChannel of caller
+    Args:
+      message (Discord.js-Message) - message to work with
+      limit (int) - number of times to move @mention
+    Notes:
+      1. if control over no voice channels, reply with sad statement
+      2. only try to move @mentions in/out channels where bot has required permission
+  */
+  function context_wrecker(message, limit) {
+    var mentions = message.mentions
+        members = mentions.users,
+        guild = message.guild,
+        channels = guild.channels,
+        real_limit = limit - 1,
+        voice_channels = [],
+        period = 1;
+
+    // build voice channels
+    for(var channel_index in channels){
+      var channel = channels[channel];
+      if(channel.type === 'voice'){
+        voice_channels.push(channel);
+      }
+    }
+
+    // for each @mention, move them around X times
+    for(var mem_index in members){
+      var member = members[mem_index];
+    }
+  }
+
 /*** end command functions ***/
 
 /*** ready status announcement ***/
@@ -364,6 +399,8 @@ var isReady = true;
           case '!suh':
           case '!wahwah':
           case '!winner':
+          case '!psycho':
+          case '!lollipop':
             isReady = false;
             var voiceChannel = message.member.voiceChannel;
             if(voiceChannel){
