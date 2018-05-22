@@ -6,6 +6,13 @@ const ytdl = require('ytdl-core');
 const sensitive = require('./sensitive.js');
 /*** end imports / requires ***/
 
+/** other global variables **/
+const streamOptions = {
+        seek: 0,
+        volume: 1
+        };
+/** end other global variables **/
+
 // setup client
 client_token = sensitive.client_token;
 const client = new Discord.Client();
@@ -127,11 +134,18 @@ var isReady = true;
     var voiceChannel = channel;
     if(voiceChannel){
       if(link){
-        voiceChannel.join().then(connection =>{
-          var dispatcher = connection.play(ytdl(link, { filter: 'audioonly' }));
-          dispatcher.on("end", end => {
+        voiceChannel.join()
+          .then(connection =>{
+            var dispatcher = connection.playStream(
+                                          ytdl(
+                                            link,
+                                            { filter: 'audioonly' }
+                                            ),
+                                          streamOptions
+                                          );
+            dispatcher.on("end", end => {
               voiceChannel.leave();
-          });
+            });
         }).catch(err => console.log(err));
       } else {
         message.reply('You need to provide a link, boy-o!');
