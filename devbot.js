@@ -56,6 +56,7 @@ var isReady = true;
     '!newbot',
     '!yt',
     '!roll',
+    '!cease',
   ]
 /*** end non-direct-response mapping ***/
 
@@ -317,6 +318,16 @@ var isReady = true;
   }
 
   /*
+    Def: kill process
+    Args:
+    Notes:
+  */
+  function cease(){
+    console.log('!cease performed');
+    process.exit();
+  }
+
+  /*
     Def: move @mention between (random) voice channels X times, finally placing in voiceChannel of caller
     Args:
       message (Discord.js-Message) - message to work with
@@ -463,6 +474,9 @@ var isReady = true;
           case '!stop':
             message.reply('Okay :(');
             break;
+          case '!cease':
+            cease();
+            break; // not needed, but muh patternz
           case 'hello':
             if(args[0].trim() == 'wubdroid')
               message.reply('Why hello, humanoid.');
