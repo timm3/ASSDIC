@@ -3,9 +3,11 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const http = require('http');
 const ytdl = require('ytdl-core');
+const sensitive = require('./sensitive.js');
 /*** end imports / requires ***/
 
 // setup client
+client_token = sensitive.client_token;
 const client = new Discord.Client();
 
 // global flags
@@ -488,7 +490,6 @@ var isReady = true;
 
 /*** non-sense ***/
   /** client login w/ credentials **/
-  client.login("NDQxMDgwOTYwMTcyMTYzMDcz.DcrbQg.OHHqWHiysskJIjo4aCnrhNHIP7s");
-  // client.login('NDM5NDkyNDkzOTAyMzQ4MzI4.DcVcew.UB_630A3njbfP1YrKpNQ1385-sQ');
+  client.login(client_token);
   /** end client login w/ credentials **/
 /*** end non-sense ***/
