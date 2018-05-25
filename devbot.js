@@ -494,18 +494,19 @@ var isReady = true;
 
   /*** special commands ***/
     client.on('message', async message => {
+      var special_msg = message.content.toLowerCase();
       // Voice only works in guilds, if the message does not come from a guild,
       // we ignore it
       if (!message.guild) return;
 
-      if (message.content === '/join') {
+      if (special_msg === '/join') {
         // Only try to join the sender's voice channel if they are in one themselves
         if (message.member.voiceChannel) {
           const connection = await message.member.voiceChannel.join();
         } else {
           message.reply('You need to join a voice channel first!');
         }
-      } else if (message.content === '!stop') {
+      } else if (special_msg === '!stop') {
         if (message.member.voiceChannel) {
           const connection = await message.member.voiceChannel.leave();
         } else {
