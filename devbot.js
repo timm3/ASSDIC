@@ -36,6 +36,8 @@ var isReady = true;
     '!winner' : './media/audio/best.mp3',
     '!psycho' : './media/audio/psycho-lollipop.mp3',
     '!lollipop' : './media/audio/psycho-lollipop.mp3',
+    '!cosby' : './media/audio/cozby.mp3',
+    '!cozby' : './media/audio/cozby.mp3',
   }
 /*** end audio command mapping ***/
 
@@ -428,6 +430,8 @@ var isReady = true;
           case '!winner':
           case '!psycho':
           case '!lollipop':
+          case '!cosby':
+          case '!cozby':
             isReady = false;
             var voiceChannel = message.member.voiceChannel;
             if(voiceChannel){
