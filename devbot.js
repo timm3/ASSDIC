@@ -9,7 +9,7 @@ const sensitive = require('./sensitive.js');
 /** other global variables **/
 const streamOptions = {
         seek: 0,
-        volume: 1
+        volume: 1,
         };
 /** end other global variables **/
 
