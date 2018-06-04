@@ -40,6 +40,8 @@ var isReady = true;
     '!cozby' : './media/audio/cozby.mp3',
     '!flamingo' : './media/audio/flamingo-shrimp.mp3',
     '!shrimp' : './media/audio/flamingo-shrimp.mp3',
+    '!carl' : './media/audio/carl-woke.mp3',
+    '!woke' : './media/audio/carl-woke.mp3',
   }
 /*** end audio command mapping ***/
 
@@ -436,6 +438,8 @@ var isReady = true;
           case '!cozby':
           case '!flamingo':
           case '!shrimp':
+          case '!carl':
+          case '!woke':
             isReady = false;
             var voiceChannel = message.member.voiceChannel;
             if(voiceChannel){
