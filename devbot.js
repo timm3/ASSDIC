@@ -442,6 +442,7 @@ var isReady = true;
           case '!shrimp':
           case '!carl':
           case '!woke':
+          case '!america':
             isReady = false;
             var voiceChannel = message.member.voiceChannel;
             if(voiceChannel){
