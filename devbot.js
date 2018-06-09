@@ -43,6 +43,7 @@ var isReady = true;
     '!shrimp' : './media/audio/flamingo-shrimp.mp3',
     '!carl' : './media/audio/carl-woke.mp3',
     '!woke' : './media/audio/carl-woke.mp3',
+    '!america' : './media/audio/america-fuck-yeah.mp3',
   }
 /*** end audio command mapping ***/
 
