@@ -44,6 +44,7 @@ var isReady = true;
     '!carl' : './media/audio/carl-woke.mp3',
     '!woke' : './media/audio/carl-woke.mp3',
     '!america' : './media/audio/america-fuck-yeah.mp3',
+    '!humans' : './media/audio/the-humans-are-all-dead.mp3',
   }
 /*** end audio command mapping ***/
 
@@ -443,6 +444,7 @@ var isReady = true;
           case '!carl':
           case '!woke':
           case '!america':
+          case '!humans':
             isReady = false;
             var voiceChannel = message.member.voiceChannel;
             if(voiceChannel){
