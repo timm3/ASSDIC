@@ -1,0 +1,24 @@
+From Default Ubuntu Server Install (20.04)
+
+As sudo user:
+
+> Install Node.js v15.x
+
+**Note; curling to bash is a horrible idea. Make 100% sure you are comfortable and knowledgeable about the code being run**
+
+curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+> discord.js [used for interfacting with discord]
+sudo npm install discord.js @discordjs/opus
+
+> ytdl [youtubedownload, used for reading media from youtube]
+sudo npm install ytdl
+sudo npm install ytdl-core
+
+> ffmpeg [used for media transcribing
+sudo npm i ffmpeg-static
+
+> update the sensitive.js file with your discord token
+> run the bot
+node disbot.js
