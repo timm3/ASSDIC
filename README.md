@@ -40,6 +40,16 @@ You can see that the commit is for issue #15, where a command (CMD) that is _aud
 If many and/or long words are necessary, leave out the subtitle.
 
 
+##### Using Github Issues/Projects
+Listed here are the stages and statuses of an issue in the `TODO` project.
+* `inert` - a proposed issue, be it a bugfix, enhancement, or feature
+* `initialized` - issue has been greenlighted for development
+* `pro-o'cedin'` - issue is being worked on
+* `debriefing` - submitted work for an issue is being reviewed
+* `assimilated` - the work has been accepted and merged
+* `crushed` - issue proposal has been denied and closed
+
+
 #### With Documentation
 
 Write them in markdown. See the resources below.
