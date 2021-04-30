@@ -1,5 +1,6 @@
 /*** imports / requires ***/
 const Discord = require('discord.js');
+const { OpusEncoder } = require('@discordjs/opus');
 const fs = require('fs');
 const http = require('http');
 const ytdl = require('ytdl-core');
@@ -146,17 +147,37 @@ var isReady = true;
       if(link){
         voiceChannel.join()
           .then(connection =>{
-            var dispatcher = connection.playStream(
-                                          ytdl(
-                                            link,
-                                            { filter: 'audioonly' }
-                                            ),
-                                          streamOptions
-                                          );
-            dispatcher.on("end", end => {
+            let dispatcher = connection.playStream(
+                  ytdl(
+                    link,
+                    { filter: 'audioonly' }
+                    ),
+                  streamOptions
+                )
+                .on("end", end => {
+                  console.log("done streaming: " + link);
+                  voiceChannel.leave();
+                })
+                .on("error", error => {
+                  console.log("oops! -- (error) -- I couldn't play that youtube link for some reason...");
+                  console.error(error.toString());
+                  voiceChannel.leave();
+                })
+                .on("exit", exit => {
+                  console.log("oops! -- (exit) -- I couldn't play that youtube link for some reason...");
+                  console.error(exit.toString());
+                  voiceChannel.leave();
+                });
+          }).catch(err => {
+            console.error(err);
+            try {
               voiceChannel.leave();
-            });
-        }).catch(err => console.log(err));
+            } catch(err) {
+              console.log("(yt-stream) Wow, something really exploded with that one!");
+              console.error(err.toString());
+            }
+          }
+        );
       } else {
         message.reply('You need to provide a link, boy-o!');
       }
@@ -361,7 +382,6 @@ var isReady = true;
         voice_channels.push(channel);
       }
     }
-
     // for each @mention, move them around X times
     for(var mem_index in members){
       var member = members[mem_index];
@@ -378,20 +398,23 @@ var isReady = true;
 
 /**** listeners ****/
   /*** direct response listener ***/
-    client.on('message', message => {
+    client.on('message', async message => {
       // ignore self-posts
       if (message.author.bot){return;}
+      // ignore errant messages?
+      if (!message.guild) return;
+
 
       // useful attributes
       var username = message.author.username;
       var text_channel = message.channel;
-      var voice_channel = message.member.voiceChannel;
+      var voice_channel = message.member ? message.member.voiceChannel : null;
       var full_message = message.content;
       var cmd = '';
       var args = [];
       var attachments = message.attachments; // type = Discord.js[Collection]
 
-      console.log(attachments);
+      // console.log(attachments);
       // var props = Object.keys(attachments);
       // console.log('trying to print props');
       // try {
@@ -453,7 +476,7 @@ var isReady = true;
                 dispatcher.on("end", end => {
                   voiceChannel.leave();
                 });
-              }).catch(err => console.log(err));
+              }).catch(err => {console.error(err)});
             } else {
               message.reply('You need to join a voice channel first!');
             }
